@@ -5,3 +5,5 @@ set cursorline
 
 set guioptions-=T
 set guioptions-=m
+
+set guifont=Inconsolata\ 12
