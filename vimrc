@@ -1,3 +1,5 @@
+set shell=/bin/bash
+
 set nocompatible
 set title
 
