@@ -60,5 +60,4 @@ if v:version >= 730
   set undodir=~/.vim/.undo,~/tmp,/tmp        " we don't care about free space on our hdd, do we?
 endif
 
-set visualbell                               " no more beeping
 set noerrorbells                             " seriously, stop beeping
