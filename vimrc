@@ -61,3 +61,5 @@ if v:version >= 730
 endif
 
 set noerrorbells                             " seriously, stop beeping
+
+au BufRead,BufNewFile *.target set filetype=jproperties
