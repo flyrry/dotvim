@@ -1,65 +1,109 @@
-set shell=/bin/bash                          " set default shell to bash as some plugins don't work in other shells
+" set default shell to bash as some plugins don't work in other shells
+set shell=/bin/bash
 
-set nocompatible                             " say bye bye to vi
+" say bye bye to vi
+set nocompatible
 
-set title                                    " change terminal's title
+" change terminal's title
+set title
 
-filetype off                                 " force reloading *after* pathogen loaded
+" force reloading *after* pathogen loaded
+filetype off
 
-call pathogen#runtime_append_all_bundles()   " pathogen magic
+" pathogen magic
+call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-syntax on                                    " syntax highlighting
+" syntax highlighting
+syntax on
 
-filetype plugin indent on                    " enable detection, plugins and indenting in one step
+" enable detection, plugins and indenting in one step
+filetype plugin indent on
 
-set number                                   " show line numbers
-"set relativenumber                          " show distance from current line to other lines
+" show line numbers
+set number
+" show distance from current line to other lines
+" set relativenumber
 
-set showmode                                 " always show what mode we are currently editing in
+" always show what mode we are currently editing in
+set showmode
 
-set nowrap                                   " do not wrap lines
+" do not wrap lines
+set nowrap
 
-set scrolloff=4                              " keep 4 lines off the edges of the screen when scrolling
+" keep 4 lines off the edges of the screen when scrolling
+set scrolloff=4
 
-set hlsearch                                 " highlight search terms
-set incsearch                                " show search matches as you type
-set ignorecase                               " ignore case when searching
-set smartcase                                " ignore case if search pattern is lowercase, case sensitive otherwise
+" highlight search terms
+set hlsearch
+" show search matches as you type
+set incsearch
+" ignore case when searching
+set ignorecase
+" ignore case if search pattern is lowercase, case sensitive otherwise
+set smartcase
 
-set autoindent                               " always set autoindenting on
+" always set autoindenting on
+set autoindent
 
-set shiftwidth=2                             " number of spaces to use for autoindenting
-set tabstop=2                                " a tab is two spaces
-set softtabstop=2                            " when backspace is used, pretend like a tab is removed, even if spaces
-set expandtab                                " expand tabs by default (overloadable per file type later if needed)
+" number of spaces to use for autoindenting
+set shiftwidth=2
+" a tab is two spaces
+set tabstop=2
+" when backspace is used, pretend like a tab is removed, even if spaces
+set softtabstop=2
+" expand tabs by default (overloadable per file type later if needed)
+set expandtab
 
 
-set laststatus=2                             " always show status line
+" always show status line
+set laststatus=2
 
-set statusline=%<%f\                         " filename
-set statusline+=%w%h%m%r                     " options
-set statusline+=%{fugitive#statusline()}     " Git Hotness
-set statusline+=\ [%{&ff}/%Y]                " filetype
-set statusline+=\ [%{getcwd()}]              " current directory
-"set statusline+=\ [A=\%03.3b/H=\%02.2B]     " ASCII / Hexadecimal value of char
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%      " Right aligned file navigation info
+" filename
+set statusline=%<%f\
+" options
+set statusline+=%w%h%m%r
+" Git Hotness
+set statusline+=%{fugitive#statusline()}
+" filetype
+set statusline+=\ [%{&ff}/%Y]
+" current directory
+set statusline+=\ [%{getcwd()}]
+" ASCII / Hexadecimal value of char
+" set statusline+=\ [A=\%03.3b/H=\%02.2B]
+" Right aligned file navigation info
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%
 
-set encoding=utf-8                           " self explanatory, right?
+" self explanatory, right?
+set encoding=utf-8
 
-set hidden                                   " hide buffers instead of closing them
+" hide buffers instead of closing them
+set hidden
 
-set history=1000                             " more brainz
-set undolevels=1000                          " even more brainz
+" more brainz
+set history=1000
+" even more brainz
+set undolevels=1000
 
-set nobackup                                 " no more backup files
-set noswapfile                               " let's hope we won't regret it one day
+" no more backup files
+set nobackup
+" let's hope we won't regret it one day
+set noswapfile
 
 if v:version >= 730
-  set undofile                               " undo available even after reopening the file
-  set undodir=~/.vim/.undo,~/tmp,/tmp        " we don't care about free space on our hdd, do we?
+  " undo available even after reopening the file
+  set undofile
+  " we don't care about free space on our hdd, do we?
+  set undodir=~/.vim/.undo,~/tmp,/tmp
 endif
 
-set noerrorbells                             " seriously, stop beeping
+" seriously, stop beeping
+set noerrorbells
 
+" ignore line wrapping when navigating in normal mode
+" (just in case if wrap will be enabled)
+nmap j gj
+nmap k gk
+
+" assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
