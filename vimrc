@@ -107,3 +107,5 @@ nmap k gk
 
 " assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
+
+map <F2> :NERDTreeToggle<CR>
