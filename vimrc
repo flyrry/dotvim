@@ -65,6 +65,8 @@ set statusline=%<%f\
 set statusline+=%w%h%m%r
 " Git Hotness
 set statusline+=%{fugitive#statusline()}
+" RVM Hotness
+set statusline+=%{rvm#statusline()}
 " filetype
 set statusline+=\ [%{&ff}/%Y]
 " current directory
@@ -109,3 +111,5 @@ nmap k gk
 au BufRead,BufNewFile *.target set filetype=jproperties
 
 map <F2> :NERDTreeToggle<CR>
+
+autocmd BufEnter * Rvm
