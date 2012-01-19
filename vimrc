@@ -46,6 +46,9 @@ set smartcase
 " always set autoindenting on
 set autoindent
 
+" do smart autoindenting when starting a new line
+set smartindent
+
 " number of spaces to use for autoindenting
 set shiftwidth=2
 " a tab is two spaces
@@ -111,5 +114,15 @@ nmap k gk
 au BufRead,BufNewFile *.target set filetype=jproperties
 
 map <F2> :NERDTreeToggle<CR>
+
+" map F5 to insert date and time
+:nnoremap <F7> "=strftime("%d.%m.%Y %H:%M:%S")<CR>P
+:inoremap <F7> <C-R>=strftime("%d.%m.%Y %H:%M:%S")<CR>
+" map F6 to insert date
+:nnoremap <F6> "=strftime("%d.%m.%Y")<CR>P
+:inoremap <F6> <C-R>=strftime("%d.%m.%Y")<CR>
+" map F7 to insert time
+:nnoremap <F5> "=strftime("%H:%M:%S")<CR>P
+:inoremap <F5> <C-R>=strftime("%H:%M:%S")<CR>
 
 autocmd BufEnter * Rvm
