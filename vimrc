@@ -29,7 +29,7 @@ set number
 set showmode
 
 " do not wrap lines
-set nowrap
+"set nowrap
 
 " keep 4 lines off the edges of the screen when scrolling
 set scrolloff=4
