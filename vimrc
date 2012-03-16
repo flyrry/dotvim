@@ -126,3 +126,5 @@ map <F2> :NERDTreeToggle<CR>
 :inoremap <F5> <C-R>=strftime("%H:%M:%S")<CR>
 
 autocmd BufEnter * Rvm
+
+set showmatch
