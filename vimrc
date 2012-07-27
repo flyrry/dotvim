@@ -69,7 +69,7 @@ set statusline+=%w%h%m%r
 " Git Hotness
 set statusline+=%{fugitive#statusline()}
 " RVM Hotness
-set statusline+=%{rvm#statusline()}
+"set statusline+=%{rvm#statusline()}
 " filetype
 set statusline+=\ [%{&ff}/%Y]
 " current directory
@@ -109,6 +109,10 @@ set noerrorbells
 " (just in case if wrap will be enabled)
 nmap j gj
 nmap k gk
+nmap ,t :!(cd ~/.meta;ctags -R ../src/)&
+nmap ,s :!find ~/src -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > ~/.meta/cscope.files<CR>
+  \:!cscope -b -i ~/.meta/cscope.files -f ~/.meta/cscope.out<CR>
+  \:cs reset<CR>
 
 " assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
@@ -128,3 +132,41 @@ map <F2> :NERDTreeToggle<CR>
 autocmd BufEnter * Rvm
 
 set showmatch
+
+" enable ctags
+set tags=~/.meta/tags
+
+" enable cscope
+if has("cscope")
+  cs add ~/.meta/cscope.out
+  " basic cscope search for under-the-cursor
+  map <C-_> :cstag <C-R>=expand("<cword>")<CR><CR>
+  " all cscope search types
+  nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+  nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+  " same but with horizontal split (ctrl-space)
+  "nmap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+  "nmap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+  "nmap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+  " same but with vertical split (ctrl-space-space)
+  "nmap <C-Space><C-Space>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space><C-Space>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space><C-Space>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space><C-Space>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space><C-Space>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+  "nmap <C-Space><C-Space>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+  "nmap <C-Space><C-Space>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+
+colors solarized
