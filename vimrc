@@ -109,10 +109,13 @@ set noerrorbells
 " (just in case if wrap will be enabled)
 nmap j gj
 nmap k gk
-nmap ,t :!(cd ~/.meta;ctags -R ../src/)&
+" ctags, cscope binds
+" make sure you have /home/.meta/ or replace it with some other directory to
+" store tags/scope.out
 nmap ,s :!find ~/src -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > ~/.meta/cscope.files<CR>
   \:!cscope -b -i ~/.meta/cscope.files -f ~/.meta/cscope.out<CR>
   \:cs reset<CR>
+nmap ,t :!ctags -f~/.meta/tags -L~/.meta/cscope.files<CR>
 
 " assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
