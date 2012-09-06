@@ -115,7 +115,7 @@ nmap k gk
 nmap ,s :!find ~/src -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > ~/.meta/cscope.files<CR>
   \:!cscope -b -i ~/.meta/cscope.files -f ~/.meta/cscope.out<CR>
   \:cs reset<CR>
-nmap ,t :!ctags -f~/.meta/tags -L~/.meta/cscope.files<CR>
+nmap ,t :!ctags -f ~/.meta/tags -L ~/.meta/cscope.files<CR>
 
 " assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
