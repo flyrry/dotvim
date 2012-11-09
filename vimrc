@@ -173,3 +173,4 @@ if has("cscope")
 endif
 
 colors solarized
+set background=dark
