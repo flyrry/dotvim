@@ -132,7 +132,7 @@ map <F2> :NERDTreeToggle<CR>
 :nnoremap <F5> "=strftime("%H:%M:%S")<CR>P
 :inoremap <F5> <C-R>=strftime("%H:%M:%S")<CR>
 
-autocmd BufEnter * Rvm
+"autocmd BufEnter * Rvm
 
 set showmatch
 
