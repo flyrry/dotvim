@@ -102,6 +102,8 @@ if v:version >= 730
   set undodir=~/.vim/.undo,~/tmp,/tmp
 endif
 
+set wildignore+=*.o,*.swp
+
 " seriously, stop beeping
 set noerrorbells
 
@@ -112,13 +114,14 @@ nmap k gk
 " ctags, cscope binds
 " make sure you have /home/.meta/ or replace it with some other directory to
 " store tags/scope.out
-nmap ,s :!find ~/src -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' > ~/.meta/cscope.files<CR>
+nmap ,s :!~/.meta/build_index.rb --config ~/.meta/config.yaml > ~/.meta/cscope.files<CR>
   \:!cscope -b -i ~/.meta/cscope.files -f ~/.meta/cscope.out<CR>
   \:cs reset<CR>
 nmap ,t :!ctags -f ~/.meta/tags -L ~/.meta/cscope.files<CR>
 
 " assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
+au BufRead,BufNewFile *.log set filetype=skyliblog
 
 map <F2> :NERDTreeToggle<CR>
 
@@ -131,6 +134,9 @@ map <F2> :NERDTreeToggle<CR>
 " map F7 to insert time
 :nnoremap <F5> "=strftime("%H:%M:%S")<CR>P
 :inoremap <F5> <C-R>=strftime("%H:%M:%S")<CR>
+
+map <C-K> :pyf /usr/local/Cellar/clang-format/2016-08-03/share/clang/clang-format.py<CR>
+imap <C-K> <c-o>:pyf /usr/local/Cellar/clang-format/2016-08-03/share/clang/clang-format.py<CR>
 
 "autocmd BufEnter * Rvm
 
@@ -172,5 +178,8 @@ if has("cscope")
   "nmap <C-Space><C-Space>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
-colors solarized
+"colors solarized
+colors gruvbox
 set background=dark
+set backspace=indent,eol,start
+set cinoptions=l1,g0
