@@ -183,3 +183,7 @@ colors gruvbox
 set background=dark
 set backspace=indent,eol,start
 set cinoptions=l1,g0
+
+" ctrl-p like fuzzy search (should be faster)
+set rtp+=/usr/local/opt/fzf
+nnoremap <C-p> :FZF<CR>
