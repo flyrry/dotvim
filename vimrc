@@ -62,23 +62,6 @@ set expandtab
 " always show status line
 set laststatus=2
 
-" filename
-set statusline=%<%f\
-" options
-set statusline+=%w%h%m%r
-" Git Hotness
-set statusline+=%{fugitive#statusline()}
-" RVM Hotness
-"set statusline+=%{rvm#statusline()}
-" filetype
-set statusline+=\ [%{&ff}/%Y]
-" current directory
-set statusline+=\ [%{getcwd()}]
-" ASCII / Hexadecimal value of char
-" set statusline+=\ [A=\%03.3b/H=\%02.2B]
-" Right aligned file navigation info
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%
-
 " self explanatory, right?
 set encoding=utf-8
 
@@ -111,38 +94,18 @@ set noerrorbells
 " (just in case if wrap will be enabled)
 nmap j gj
 nmap k gk
+
+"-------- ctags / cscope --------
+
+" superseded by rtags, keeping around for nostalgic reasons
+if 0
 " ctags, cscope binds
 " make sure you have /home/.meta/ or replace it with some other directory to
-" store tags/scope.out
+" store 'tags' and 'scope.out'
 nmap ,s :!~/.meta/build_index.rb --config ~/.meta/config.yaml > ~/.meta/cscope.files<CR>
   \:!cscope -b -i ~/.meta/cscope.files -f ~/.meta/cscope.out<CR>
   \:cs reset<CR>
 nmap ,t :!ctags -f ~/.meta/tags -L ~/.meta/cscope.files<CR>
-
-" assign syntax highlighting to *.target files
-au BufRead,BufNewFile *.target set filetype=jproperties
-au BufRead,BufNewFile *.log set filetype=skyliblog
-
-map <F2> :NERDTreeToggle<CR>
-
-" map F5 to insert date and time
-:nnoremap <F7> "=strftime("%d.%m.%Y %H:%M:%S")<CR>P
-:inoremap <F7> <C-R>=strftime("%d.%m.%Y %H:%M:%S")<CR>
-" map F6 to insert date
-:nnoremap <F6> "=strftime("%d.%m.%Y")<CR>P
-:inoremap <F6> <C-R>=strftime("%d.%m.%Y")<CR>
-" map F7 to insert time
-:nnoremap <F5> "=strftime("%H:%M:%S")<CR>P
-:inoremap <F5> <C-R>=strftime("%H:%M:%S")<CR>
-
-map <C-K> :pyf /usr/local/Cellar/clang-format/2016-08-03/share/clang/clang-format.py<CR>
-imap <C-K> <c-o>:pyf /usr/local/Cellar/clang-format/2016-08-03/share/clang/clang-format.py<CR>
-
-"autocmd BufEnter * Rvm
-
-set showmatch
-
-" enable ctags
 set tags=~/.meta/tags
 
 " enable cscope
@@ -159,24 +122,31 @@ if has("cscope")
   nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
   nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
   nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-  " same but with horizontal split (ctrl-space)
-  "nmap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-  "nmap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-  "nmap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-  " same but with vertical split (ctrl-space-space)
-  "nmap <C-Space><C-Space>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space><C-Space>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space><C-Space>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space><C-Space>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space><C-Space>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-  "nmap <C-Space><C-Space>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-  "nmap <C-Space><C-Space>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 endif
+endif
+
+" -------------------------------
+
+" assign syntax highlighting to *.target files
+au BufRead,BufNewFile *.target set filetype=jproperties
+au BufRead,BufNewFile *.log set filetype=skyliblog
+
+noremap <F2> :NERDTreeToggle<CR>
+
+" map F5 to insert date and time
+:nnoremap <F7> "=strftime("%d.%m.%Y %H:%M:%S")<CR>P
+:inoremap <F7> <C-R>=strftime("%d.%m.%Y %H:%M:%S")<CR>
+" map F6 to insert date
+:nnoremap <F6> "=strftime("%d.%m.%Y")<CR>P
+:inoremap <F6> <C-R>=strftime("%d.%m.%Y")<CR>
+" map F7 to insert time
+:nnoremap <F5> "=strftime("%H:%M:%S")<CR>P
+:inoremap <F5> <C-R>=strftime("%H:%M:%S")<CR>
+
+noremap <C-K> :pyf /usr/local/Cellar/clang-format/2016-08-03/share/clang/clang-format.py<CR>
+inoremap <C-K> <c-o>:pyf /usr/local/Cellar/clang-format/2016-08-03/share/clang/clang-format.py<CR>
+
+set showmatch
 
 "colors solarized
 colors gruvbox
@@ -187,3 +157,23 @@ set cinoptions=l1,g0
 " ctrl-p like fuzzy search (should be faster)
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-p> :FZF<CR>
+
+" ------- rtags bindings --------
+"let g:rtagsUseDefaultMappings = 0
+let g:rtagsUseLocationList = 0
+noremap ,j :call rtags#JumpTo(g:SAME_WINDOW)<CR>
+noremap ,J :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
+noremap ,<C-x>j :call rtags#JumpTo(g:H_SPLIT)<CR>
+noremap ,<C-v>j :call rtags#JumpTo(g:V_SPLIT)<CR>
+"noremap <C-t>j :call rtags#JumpTo(g:NEW_TAB)<CR>
+noremap ,i :call rtags#SymbolInfo()<CR>
+noremap ,p :call rtags#JumpToParent()<CR>
+noremap ,f :call rtags#FindRefs()<CR>
+noremap ,n :call rtags#FindRefsByName(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
+noremap ,s :call rtags#FindSymbols(input("Pattern? ", "", "customlist,rtags#CompleteSymbols"))<CR>
+noremap ,r :call rtags#RenameSymbolUnderCursor()<CR>
+noremap ,v :call rtags#FindVirtuals()<CR>
+noremap ,b :call rtags#JumpBack()<CR>
+noremap ,C :call rtags#FindSuperClasses()<CR>
+noremap ,c :call rtags#FindSubClasses()<CR>
+" -------------------------------

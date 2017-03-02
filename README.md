@@ -2,6 +2,14 @@
 
     git clone git://github.com/flyrry/dotvim.git ~/.vim
 
+##### For fuzzy-search support:
+
+    brew install fzf
+
+##### For fast and smart C++ indexing/browsing:
+
+    brew install rtags
+
 ### Create symlinks:
 
     ln -s ~/.vim/vimrc ~/.vimrc
