@@ -20,6 +20,9 @@ syntax on
 " enable detection, plugins and indenting in one step
 filetype plugin indent on
 
+" use fancy brackets to fold regions
+set foldmethod=marker
+
 " show line numbers
 set number
 " show distance from current line to other lines
@@ -30,6 +33,9 @@ set showmode
 
 " do not wrap lines
 "set nowrap
+
+" reset mouse setting; this enables OS to scan selection and CMD+C works
+set mouse=
 
 " keep 4 lines off the edges of the screen when scrolling
 set scrolloff=4
@@ -95,7 +101,7 @@ set noerrorbells
 nmap j gj
 nmap k gk
 
-"-------- ctags / cscope --------
+"-------- ctags / cscope --------{{{
 
 " superseded by rtags, keeping around for nostalgic reasons
 if 0
@@ -125,7 +131,7 @@ if has("cscope")
 endif
 endif
 
-" -------------------------------
+" -------------------------------}}}
 
 " assign syntax highlighting to *.target files
 au BufRead,BufNewFile *.target set filetype=jproperties
@@ -158,9 +164,14 @@ set cinoptions=l1,g0
 set rtp+=/usr/local/opt/fzf
 nnoremap <C-p> :FZF<CR>
 
-" ------- rtags bindings --------
+" ripgrep for faster grepping
+set grepprg=rg\ --vimgrep
+
+" ------- rtags bindings --------{{{
 "let g:rtagsUseDefaultMappings = 0
-let g:rtagsUseLocationList = 0
+"let g:rtagsUseLocationList = 0
+let g:rtagsLog="rtags.log"
+set completefunc=RtagsCompleteFunc
 noremap ,j :call rtags#JumpTo(g:SAME_WINDOW)<CR>
 noremap ,J :call rtags#JumpTo(g:SAME_WINDOW, { '--declaration-only' : '' })<CR>
 noremap ,<C-x>j :call rtags#JumpTo(g:H_SPLIT)<CR>
@@ -176,4 +187,4 @@ noremap ,v :call rtags#FindVirtuals()<CR>
 noremap ,b :call rtags#JumpBack()<CR>
 noremap ,C :call rtags#FindSuperClasses()<CR>
 noremap ,c :call rtags#FindSubClasses()<CR>
-" -------------------------------
+" -------------------------------}}}
